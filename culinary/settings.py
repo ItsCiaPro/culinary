@@ -47,11 +47,14 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'authentication.middleware.LoginRequiredMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'culinary.urls'
+LOGIN_URL = 'login'
+AUTH_REQUIRED_URLS = []
 
 TEMPLATES = [
     {
@@ -118,8 +121,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIR = [
-   os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+   BASE_DIR / 'static',
 ]
 
 # Default primary key field type

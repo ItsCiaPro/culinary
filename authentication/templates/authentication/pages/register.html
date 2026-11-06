@@ -1,1 +1,20 @@
-{% e %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Criar conta{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="auth-form">
+    <h2>Criar conta</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Cadastrar</button>
+    </form>
+    <p>Já tem uma conta? <a href="{% url 'login' %}">Entrar</a></p>
+</section>
+{% endblock %}

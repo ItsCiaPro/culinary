@@ -1,7 +1,25 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Entrar{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
 
 {% block content %}
-<h2>Login</h2>
+<section class="auth-form">
+    {% if user.is_authenticated %}
+        <h2>Você já está conectado</h2>
+        <p>Conta: <strong>{{ user.get_username }}</strong></p>
+    {% else %}
+        <h2>Entrar</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Entrar</button>
+        </form>
+        <p>Não tem uma conta? <a href="{% url 'register' %}">Cadastre-se</a></p>
+    {% endif %}
+</section>
 {% endblock %}
