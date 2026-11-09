@@ -49,13 +49,77 @@
                 </div>
             </nav>
 
+            <!-- Card -->
             <main>
-                <h1>Dashboard</h1>
-                <p>O layout em Django foi convertido para uma estrutura estática padrão (Vanilla HTML/CSS/JS).</p>
-                <p>Você pode abrir o arquivo <code>index.html</code> diretamente no navegador, sem precisar de um
-                    servidor Python rodando.</p>
+                <div class="kitchen-card">
+                    <!-- Canto decorativo com bolhas -->
+                    <div class="card-decoration">
+                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" stroke="#d8c8b2" stroke-width="1.5" opacity="0.5" />
+                            <circle cx="35" cy="55" r="35" stroke="#d8c8b2" stroke-width="1.5" opacity="0.5" />
+                            <circle cx="65" cy="40" r="30" stroke="#d8c8b2" stroke-width="1.5" opacity="0.5" />
+                        </svg>
+                    </div>
+
+                    <!-- Conteúdo do Card -->
+                    <span class="card-tag">SUA COZINHA HOJE</span>
+
+                    <h2 class="card-title">
+                        Você pode fazer <span class="highlight">1</span><br>
+                        receitas agora
+                    </h2>
+
+                    <p class="card-meta">5 ingredientes · 3 máquinas cadastradas</p>
+
+                    <a href="despensa.html" class="card-btn">
+                        Atualizar despensa
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+                
+
+                <!-- Pode fazer agora -->
+                <div class="recipe-section">
+                    <h2 class="section-title">Pode fazer agora</h2>
+
+                    <div class="recipe-card">
+                        <!-- Container da Imagem com Tag de Avaliação -->
+                        <div class="card-image-wrapper">
+                            <span class="rating-badge">
+                                <span class="star">★</span> 4.5
+                            </span>
+                            <!-- BOTE O CAMINHO DA SUA IMAGEM AQUI NO SRC -->
+                            <img src="./assets/imgs/omelete.jpg" alt="Omelete com Tomate" class="card-image">
+                        </div>
+
+                        <!-- Conteúdo do Card -->
+                        <div class="card-content">
+                            <h3 class="recipe-title">Omelete com Tomate</h3>
+
+                            <div class="recipe-time">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                <span>15 min</span>
+                            </div>
+
+                            <button type="button" class="recipe-btn">Ver receita</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
             </main>
+
         </div>
+
     </div>
 
     <!-- Referência ao JS Normal -->
