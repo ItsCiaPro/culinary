@@ -1,0 +1,36 @@
+@if (recipe) {
+  <a class="back" routerLink="/receitas">← Voltar</a>
+  <div class="detail">
+    <img [src]="'assets/' + recipe.image" [alt]="recipe.name" />
+    <section>
+      <h1>{{ recipe.name }}</h1>
+      <p class="muted">{{ recipe.description }}</p>
+      <p>
+        ★ {{ recipe.rating }}　◷ {{ recipe.minutes }} min　♧
+        {{ recipe.servings }} porções
+      </p>
+      <div class="soft status">
+        @if (!missing.length) {
+          Você tem tudo! Mãos à obra. 🎉
+        } @else {
+          <b>Faltam {{ missing.length }}:</b> {{ missing.join(", ")
+          }}<button class="primary-btn" (click)="pantry.addShopping(missing)">
+            🛒 Adicionar às compras
+          </button>
+        }
+      </div>
+      <h2>Ingredientes</h2>
+      <ul>
+        @for (i of recipe.ingredients; track i) {
+          <li>{{ i }}</li>
+        }
+      </ul>
+      <h2>Modo de preparo</h2>
+      <ol>
+        @for (s of recipe.steps; track s) {
+          <li>{{ s }}</li>
+        }
+      </ol>
+    </section>
+  </div>
+}

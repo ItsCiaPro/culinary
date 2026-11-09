@@ -1,0 +1,44 @@
+.post-form {
+  max-width: 760px;
+  padding: 25px;
+  margin-top: 20px;
+  display: grid;
+  gap: 15px;
+}
+
+.post-form label {
+  display: grid;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.post-form h3 {
+  margin: 5px 0 0;
+  font:
+    700 20px "Playfair Display",
+    serif;
+}
+
+.two-fields,
+.inline {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.inline {
+  grid-template-columns: 1fr auto;
+}
+
+@media (max-width: 650px) {
+  .post-form {
+    padding: 17px;
+  }
+}
+
+@media (max-width: 650px) {
+  .two-fields {
+    gap: 8px;
+  }
+}

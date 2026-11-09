@@ -1,0 +1,23 @@
+<div class="video-page">
+  <div class="video-top">
+    <a routerLink="/">← Início</a><b>Vídeos da comunidade</b
+    ><a routerLink="/receitas">Receitas →</a>
+  </div>
+  @for (r of recipes; track r.id; let i = $index) {
+    <section
+      class="video-card"
+      [style.background-image]="'url(assets/' + r.image + ')'"
+    >
+      <div class="video-content">
+        <div>
+          <small>{{ authors[i % authors.length] }}</small>
+          <h2>{{ r.name }}</h2>
+          <p>{{ r.description }}</p>
+          <small>◷ {{ r.minutes }} min · {{ r.servings }} porções</small>
+        </div>
+        <a [routerLink]="['/receita', r.id]">Ver receita ↗</a>
+      </div>
+      <span class="play-icon">▶</span>
+    </section>
+  }
+</div>

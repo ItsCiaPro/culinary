@@ -1,0 +1,271 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  width: 250px;
+  height: 100vh;
+  flex-shrink: 0;
+  background: var(--green);
+  color: #f8f4e9;
+  padding: 34px 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font:
+    700 27px "Playfair Display",
+    serif;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+}
+
+.sidebar nav {
+  display: grid;
+  gap: 7px;
+  margin-top: 45px;
+}
+
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 13px 15px;
+  border-radius: 13px;
+  color: #e5e9e3;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  background: #e8bd68;
+  color: var(--green);
+}
+
+.sidebar nav a span {
+  font-size: 20px;
+}
+
+.count {
+  margin-left: auto;
+  background: var(--terracotta);
+  color: white;
+  border-radius: 20px;
+  padding: 2px 8px;
+}
+
+.side-note {
+  margin-top: auto;
+  color: #bdc8bf;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.main {
+  min-width: 0;
+  flex: 1;
+  padding: 24px 30px 60px;
+}
+
+.hero {
+  position: relative;
+  background: var(--green);
+  border-radius: 28px;
+  padding: 25px 32px;
+  margin-bottom: 28px;
+  overflow: hidden;
+}
+
+.hero:after {
+  content: "";
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  border: 1px solid #ffffff25;
+  border-radius: 50%;
+  right: 8%;
+  top: -120px;
+  box-shadow:
+    0 0 0 20px #ffffff09,
+    0 0 0 42px #ffffff08;
+}
+
+.search {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 560px;
+  background: var(--paper);
+  border-radius: 40px;
+  padding: 11px 15px;
+  color: var(--muted);
+}
+
+.search span {
+  font-size: 25px;
+}
+
+.search input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  width: 100%;
+  font-size: 14px;
+}
+
+.search button {
+  border: 0;
+  background: var(--gold);
+  color: var(--green);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-weight: 800;
+}
+
+.mobile-brand,
+.mobile-nav {
+  display: none;
+}
+
+main {
+  max-width: 1200px;
+  margin: auto;
+}
+
+@media (max-width: 950px) {
+  .sidebar {
+    width: 210px;
+  }
+}
+
+@media (max-width: 950px) {
+  .main {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 650px) {
+  .layout {
+    display: block;
+  }
+}
+
+@media (max-width: 650px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 650px) {
+  .main {
+    padding: 0 0 85px;
+  }
+}
+
+@media (max-width: 650px) {
+  .hero {
+    border-radius: 0 0 27px 27px;
+    padding: 14px 18px 22px;
+    margin: 0 0 22px;
+  }
+}
+
+@media (max-width: 650px) {
+  .mobile-brand {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font:
+      700 21px "Playfair Display",
+      serif;
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 650px) {
+  .mobile-brand a:last-child {
+    background: #ffffff20;
+    border-radius: 50%;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 650px) {
+  .search {
+    padding: 9px 13px;
+  }
+}
+
+@media (max-width: 650px) {
+  .main > main {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 650px) {
+  .mobile-nav {
+    display: flex;
+    position: fixed;
+    z-index: 20;
+    bottom: 9px;
+    left: 9px;
+    right: 9px;
+    background: var(--green);
+    border-radius: 30px;
+    padding: 7px 3px;
+    justify-content: space-around;
+    box-shadow: 0 8px 25px #17251e40;
+  }
+}
+
+@media (max-width: 650px) {
+  .mobile-nav a {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    color: #d8e0d9;
+    padding: 5px 0;
+    border-radius: 22px;
+  }
+}
+
+@media (max-width: 650px) {
+  .mobile-nav a.active {
+    background: var(--gold);
+    color: var(--green);
+  }
+}
+
+@media (max-width: 650px) {
+  .mobile-nav span {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 650px) {
+  .mobile-nav small {
+    font-size: 9px;
+  }
+}

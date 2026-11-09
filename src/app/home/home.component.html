@@ -1,0 +1,30 @@
+<section class="welcome-grid">
+  <div class="soft welcome">
+    <p class="eyebrow">SUA COZINHA HOJE</p>
+    <h1>
+      Você pode fazer <em>{{ ready.length }}</em> receitas agora
+    </h1>
+    <p class="muted">
+      {{ pantry.ingredients().length }} ingredientes ·
+      {{ pantry.machines().length }} máquinas cadastradas
+    </p>
+    <a class="primary-btn" routerLink="/despensa">Atualizar despensa　→</a>
+  </div>
+  @if (almost[0]) {
+    <div class="soft almost">
+      <p class="eyebrow">QUASE LÁ</p>
+      <h2>{{ almost[0].recipe.name }}</h2>
+      <p>
+        Só falta <b>{{ almost[0].missing.join(" e ") }}</b
+        >.
+      </p>
+      <button class="herb-btn" (click)="pantry.addShopping(almost[0].missing)">
+        🛒 Adicionar às compras
+      </button>
+    </div>
+  }
+</section>
+<app-section title="Pode fazer agora" [recipes]="ready" /><app-section
+  title="Falta pouco"
+  [recipes]="almostRecipes"
+/><app-section title="Receitas do dia" [recipes]="popular" />

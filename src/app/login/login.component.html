@@ -1,0 +1,59 @@
+<div class="login-wrap">
+  <div class="login-card">
+    <a routerLink="/" class="back">← Voltar ao início</a>
+    <div class="login-brand">🍳 <b>Despensa</b></div>
+    <h1>
+      {{
+        tab === "entrar"
+          ? "Que bom ter você de volta!"
+          : tab === "cadastro"
+            ? "Crie sua conta"
+            : "Recuperar senha"
+      }}
+    </h1>
+    <p class="muted">
+      {{
+        tab === "entrar"
+          ? "Entre para salvar sua despensa e suas receitas."
+          : tab === "cadastro"
+            ? "Leva menos de um minuto."
+            : "Enviaremos um link para o seu e-mail."
+      }}
+    </p>
+    <div class="pills">
+      <button (click)="tab = 'entrar'" [class.selected]="tab === 'entrar'">
+        Entrar</button
+      ><button (click)="tab = 'cadastro'" [class.selected]="tab === 'cadastro'">
+        Criar conta
+      </button>
+    </div>
+    <form (submit)="submit($event)">
+      @if (tab === "cadastro") {
+        <input class="field" required placeholder="Seu nome" />
+      }
+      <input
+        class="field"
+        type="email"
+        required
+        placeholder="Seu e-mail"
+      /><input class="field" type="password" required placeholder="Sua senha" />
+      @if (tab === "cadastro") {
+        <input
+          class="field"
+          type="password"
+          required
+          placeholder="Repita sua senha"
+        />
+      }
+      <button class="primary-btn full">
+        {{ tab === "entrar" ? "Entrar" : "Criar conta" }}
+      </button>
+    </form>
+    <button class="text-btn" (click)="tab = 'recuperar'">
+      Esqueci minha senha
+    </button>
+    <p class="muted tiny">
+      Tela de demonstração — o login ainda não está ativo.
+    </p>
+  </div>
+</div>

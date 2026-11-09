@@ -1,0 +1,121 @@
+.video-page {
+  margin: -28px -30px 0;
+  background: #17251e;
+  padding: 15px;
+  min-height: 100vh;
+  color: white;
+}
+
+.video-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 8px 20px;
+}
+
+.video-top a {
+  color: #e8bd68;
+}
+
+.video-card {
+  height: 75vh;
+  min-height: 470px;
+  max-width: 800px;
+  margin: 0 auto 15px;
+  border-radius: 22px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-content {
+  position: absolute;
+  bottom: 28px;
+  left: 25px;
+  right: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 15px;
+  padding: 18px;
+  border-radius: 16px;
+  background: #101b16e6;
+}
+
+.video-content h2 {
+  font:
+    700 32px "Playfair Display",
+    serif;
+  margin: 8px 0;
+}
+
+.video-content p {
+  color: #e0e3de;
+  font-size: 13px;
+}
+
+.video-content > a {
+  background: var(--gold);
+  color: var(--green);
+  padding: 12px 16px;
+  border-radius: 15px;
+  font-weight: 800;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.play-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 38px;
+  color: #ffffffc9;
+  border: 2px solid #ffffff80;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: grid;
+  place-items: center;
+  padding-left: 5px;
+}
+
+@media (max-width: 950px) {
+  .video-page {
+    margin: -20px -18px 0;
+  }
+}
+
+@media (max-width: 650px) {
+  .video-page {
+    margin: 0;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 650px) {
+  .video-card {
+    height: 76vh;
+    min-height: 440px;
+  }
+}
+
+@media (max-width: 650px) {
+  .video-content {
+    left: 16px;
+    right: 16px;
+    bottom: 20px;
+  }
+}
+
+@media (max-width: 650px) {
+  .video-content h2 {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 650px) {
+  .video-content > a {
+    padding: 10px;
+  }
+}

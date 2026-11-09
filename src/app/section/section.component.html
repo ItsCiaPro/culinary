@@ -1,0 +1,22 @@
+<section class="section">
+  <div class="section-head">
+    <h2>{{ title }}</h2>
+    <a routerLink="/receitas">Ver todas →</a>
+  </div>
+  <div class="recipe-grid">
+    @for (r of recipes; track r.id) {
+      <a class="recipe-card" [routerLink]="['/receita', r.id]"
+        ><img [src]="'assets/' + r.image" [alt]="r.name" />
+        <div class="recipe-info">
+          <span class="rating">★ {{ r.rating }}</span>
+          <h3>{{ r.name }}</h3>
+          <p>◷ {{ r.minutes }} min · {{ r.servings }} porções</p>
+        </div></a
+      >
+    } @empty {
+      <p class="empty">
+        Nenhuma receita por aqui. Adicione ingredientes à sua despensa.
+      </p>
+    }
+  </div>
+</section>

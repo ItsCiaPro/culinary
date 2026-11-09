@@ -1,0 +1,37 @@
+.shopping-list {
+  max-width: 650px;
+  margin-top: 25px;
+  padding: 8px 18px;
+}
+
+.shopping-row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.shopping-row:last-child {
+  border: 0;
+}
+
+.shopping-row span {
+  flex: 1;
+}
+
+.buy {
+  width: 27px;
+  height: 27px;
+  border: 2px solid var(--herb);
+  color: var(--herb);
+  border-radius: 50%;
+  background: none;
+}
+
+.remove {
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 22px;
+}

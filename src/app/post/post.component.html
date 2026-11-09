@@ -1,0 +1,57 @@
+<h1 class="page-title">Postar receita</h1>
+<p class="muted">Compartilhe sua criação com a comunidade.</p>
+<form class="post-form soft" (submit)="submit($event)">
+  <label
+    >Nome da receita<input
+      class="field"
+      required
+      placeholder="Ex.: Bolo de cenoura" /></label
+  ><label
+    >Descrição<textarea
+      class="field"
+      rows="3"
+      placeholder="Uma descrição curta e apetitosa..."
+    ></textarea>
+  </label>
+  <div class="two-fields">
+    <label
+      >Tempo (min)<input class="field" type="number" min="1" required /></label
+    ><label
+      >Porções<input class="field" type="number" min="1" required
+    /></label>
+  </div>
+  <label
+    >Foto do prato<input class="field" type="file" accept="image/*"
+  /></label>
+  <h3>Ingredientes</h3>
+  <div class="inline">
+    <input
+      class="field"
+      [(ngModel)]="ingredient"
+      name="ingredient"
+      placeholder="Novo ingrediente"
+    /><button type="button" class="primary-btn" (click)="add()">
+      Adicionar
+    </button>
+  </div>
+  <div class="tags">
+    @for (i of ingredients; track i) {
+      <span
+        >{{ i }}
+        <button type="button" (click)="removeIngredient(i)">×</button></span
+      >
+    }
+  </div>
+  <h3>Modo de preparo</h3>
+  @for (s of steps; track $index) {
+    <input
+      class="field"
+      [(ngModel)]="steps[$index]"
+      [name]="'step' + $index"
+      [placeholder]="'Passo ' + ($index + 1)"
+    />
+  }
+  <button type="button" class="text-btn" (click)="steps.push('')">
+    ＋ Adicionar passo</button
+  ><button class="primary-btn full">Publicar receita</button>
+</form>

@@ -1,0 +1,57 @@
+<div class="layout">
+  <aside class="sidebar">
+    <a routerLink="/" class="brand">
+      <span class="brand-icon">🍳</span>
+      <span>Despensa</span>
+    </a>
+    <nav>
+      @for (item of nav; track item.path) {
+        <a
+          [routerLink]="item.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+        >
+          <span>{{ item.icon }}</span>
+          {{ item.label }}
+          @if (item.path === "/compras" && pantry.shopping().length) {
+            <b class="count">{{ pantry.shopping().length }}</b>
+          }
+        </a>
+      }
+    </nav>
+    <div class="side-note">Cozinhe melhor com o que você já tem.</div>
+  </aside>
+
+  <div class="main">
+    <header class="hero">
+      <div class="mobile-brand">
+        <a routerLink="/">🍳 Despensa</a>
+        <a routerLink="/entrar">👤</a>
+      </div>
+      <form class="search" (submit)="search($event)">
+        <span>⌕</span>
+        <input
+          name="q"
+          [value]="query"
+          (input)="query = $any($event.target).value"
+          placeholder="Pesquise sua próxima receita"
+        />
+        <button aria-label="Pesquisar">→</button>
+      </form>
+    </header>
+    <main><router-outlet /></main>
+  </div>
+
+  <nav class="mobile-nav">
+    @for (item of nav; track item.path) {
+      <a
+        [routerLink]="item.path"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+      >
+        <span>{{ item.icon }}</span>
+        <small>{{ item.label }}</small>
+      </a>
+    }
+  </nav>
+</div>

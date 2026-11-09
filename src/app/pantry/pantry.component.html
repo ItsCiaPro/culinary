@@ -1,0 +1,60 @@
+<h1 class="page-title">Quais ingredientes você tem?</h1>
+<div class="pantry-layout">
+  <section>
+    <h2>Categorias</h2>
+    <div class="category-grid">
+      @for (c of categories; track c.id) {
+        <button
+          class="category"
+          [class.chosen]="cat === c.id && !q"
+          (click)="cat = c.id; q = ''"
+        >
+          <span>{{ c.emoji }}</span
+          >{{ c.name }}
+        </button>
+      }
+    </div>
+    <input
+      class="field search-field"
+      [(ngModel)]="q"
+      placeholder="⌕ Pesquisar ingrediente"
+    />
+    <div class="pills ingredient-pills">
+      @for (i of items(); track i) {
+        <button
+          [class.selected]="pantry.ingredients().includes(i)"
+          (click)="pantry.toggleIngredient(i)"
+        >
+          {{ pantry.ingredients().includes(i) ? "✓ " : "" }}{{ i }}
+        </button>
+      }
+    </div>
+    <h2 class="subheading">Máquinas disponíveis</h2>
+    <div class="machine-grid">
+      @for (m of machines; track m.id) {
+        <button
+          class="machine"
+          [class.chosen]="pantry.machines().includes(m.id)"
+          (click)="pantry.toggleMachine(m.id)"
+        >
+          <span>{{ m.emoji }}</span
+          >{{ m.name }}
+        </button>
+      }
+    </div>
+  </section>
+  <aside class="soft selected-box">
+    <h3>Selecionados ({{ pantry.ingredients().length }})</h3>
+    <button class="clear" (click)="pantry.clear()">Limpar ×</button>
+    <div class="tags">
+      @for (i of pantry.ingredients(); track i) {
+        <span
+          >{{ i }} <button (click)="pantry.toggleIngredient(i)">×</button></span
+        >
+      } @empty {
+        <p class="muted">Nenhum ingrediente ainda.</p>
+      }
+    </div>
+    <a class="primary-btn full" routerLink="/receitas">Encontrar receitas</a>
+  </aside>
+</div>

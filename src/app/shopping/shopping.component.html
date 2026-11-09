@@ -1,0 +1,15 @@
+<h1 class="page-title">Lista de compras</h1>
+<p class="muted">Marque como comprado e o item vai direto pra sua despensa.</p>
+<div class="soft shopping-list">
+  @for (i of pantry.shopping(); track i) {
+    <div class="shopping-row">
+      <button class="buy" (click)="pantry.buy(i)">✓</button><span>{{ i }}</span
+      ><button class="remove" (click)="pantry.removeShopping(i)">×</button>
+    </div>
+  } @empty {
+    <p class="empty">
+      Lista vazia. Veja receitas em
+      <a routerLink="/receitas">Falta pouco</a>.
+    </p>
+  }
+</div>
