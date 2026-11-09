@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Início{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+{% endblock %}
+{% block content %}
+
+<main class="app-layout">
+   {% include 'nucleo/partials/sidebar.html' %}
+</main>
+
+{% endblock %}

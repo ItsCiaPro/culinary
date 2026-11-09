@@ -34,11 +34,20 @@ class LoginViewTests(TestCase):
             {"username": self.username, "password": self.password},
         )
 
-        self.assertRedirects(response, reverse("login"))
+        self.assertRedirects(response, reverse("home"))
         self.assertEqual(
             int(self.client.session["_auth_user_id"]),
             get_user_model().objects.get(username=self.username).pk,
         )
+
+    def test_authenticated_user_visiting_login_is_redirected_home(self):
+        self.client.force_login(
+            get_user_model().objects.get(username=self.username)
+        )
+
+        response = self.client.get(reverse("login"))
+
+        self.assertRedirects(response, reverse("home"))
 
 
 class RegisterViewTests(TestCase):
@@ -64,6 +73,17 @@ class RegisterViewTests(TestCase):
         self.assertRedirects(response, reverse("login"))
         user = get_user_model().objects.get(username="newuser")
         self.assertTrue(user.check_password(password))
+
+
+class HomeViewTests(TestCase):
+    def test_home_page_is_available(self):
+        response = self.client.get(reverse("home"))
+
+        self.assertEqual(response.status_code, 200)
+        html = response.content.decode()
+        stylesheet_link = '<link rel="stylesheet" href="/static/css/sidebar.css">'
+        self.assertIn(stylesheet_link, html)
+        self.assertLess(html.index(stylesheet_link), html.index("</head>"))
 
 
 @override_settings(AUTH_REQUIRED_URLS=["register"])

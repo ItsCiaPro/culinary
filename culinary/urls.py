@@ -8,4 +8,5 @@ urlpatterns = [
     path("", RedirectView.as_view(url="auth/")),
 
     path("auth/", include("authentication.urls")),
+    path("home/", include("nucleo.urls")),
 ]
