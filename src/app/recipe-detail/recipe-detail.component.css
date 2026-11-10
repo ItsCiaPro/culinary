@@ -28,7 +28,7 @@
 
 .detail li {
   padding: 5px 0;
-  color: #536057;
+  color: var(--muted);
 }
 
 .status {

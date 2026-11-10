@@ -1,11 +1,12 @@
 import { Component } from "@angular/core";
 import { RouterLink } from "@angular/router";
 import { Recipe } from "../data";
+import { IconComponent } from "../shared/icon.component";
 
 @Component({
   selector: "app-section",
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, IconComponent],
   inputs: ["title", "recipes"],
   templateUrl: "./section.component.html",
   styleUrl: "./section.component.css",

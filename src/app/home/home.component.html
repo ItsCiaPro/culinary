@@ -8,7 +8,9 @@
       {{ pantry.ingredients().length }} ingredientes ·
       {{ pantry.machines().length }} máquinas cadastradas
     </p>
-    <a class="primary-btn" routerLink="/despensa">Atualizar despensa　→</a>
+    <a class="primary-btn" routerLink="/despensa">
+      Atualizar despensa <app-icon name="arrow-right"></app-icon>
+    </a>
   </div>
   @if (almost[0]) {
     <div class="soft almost">
@@ -19,7 +21,7 @@
         >.
       </p>
       <button class="herb-btn" (click)="pantry.addShopping(almost[0].missing)">
-        🛒 Adicionar às compras
+        <app-icon name="cart"></app-icon> Adicionar às compras
       </button>
     </div>
   }

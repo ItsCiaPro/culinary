@@ -1,23 +1,53 @@
-<div class="video-page">
+<div class="video-page" (wheel)="onWheel($event)">
+  <a class="mobile-exit" routerLink="/" aria-label="Sair dos vídeos">
+    <app-icon name="arrow-left"></app-icon> Início
+  </a>
+
   <div class="video-top">
-    <a routerLink="/">← Início</a><b>Vídeos da comunidade</b
-    ><a routerLink="/receitas">Receitas →</a>
+    <a routerLink="/"><app-icon name="arrow-left"></app-icon> Início</a>
+    <div>
+      <h1>Vídeos curtos</h1>
+      <p>Inspire-se e descubra sua próxima receita.</p>
+    </div>
+    <a routerLink="/receitas">Receitas <app-icon name="arrow-right"></app-icon></a>
   </div>
-  @for (r of recipes; track r.id; let i = $index) {
-    <section
-      class="video-card"
-      [style.background-image]="'url(assets/' + r.image + ')'"
-    >
-      <div class="video-content">
-        <div>
-          <small>{{ authors[i % authors.length] }}</small>
-          <h2>{{ r.name }}</h2>
-          <p>{{ r.description }}</p>
-          <small>◷ {{ r.minutes }} min · {{ r.servings }} porções</small>
+
+  <div
+    class="shorts-stage"
+    (touchstart)="onTouchStart($event)"
+    (touchend)="onTouchEnd($event)"
+  >
+    @for (recipe of [activeRecipe]; track recipe.id) {
+      <section
+        class="video-card"
+        [class.slide-next]="slideDirection === 'next'"
+        [class.slide-previous]="slideDirection === 'previous'"
+        [attr.aria-label]="'Vídeo curto: ' + recipe.name"
+        [style.background-image]="'url(assets/' + recipe.image + ')'"
+      >
+        <div class="video-topline">
+          <span>RECEITA EM DESTAQUE</span>
+          <span>{{ activeIndex + 1 }} / {{ recipes.length }}</span>
         </div>
-        <a [routerLink]="['/receita', r.id]">Ver receita ↗</a>
-      </div>
-      <span class="play-icon">▶</span>
-    </section>
-  }
+
+        <div class="video-content">
+          <div>
+            <div class="creator">
+              <span class="creator-icon"><app-icon name="pot"></app-icon></span>
+              {{ activeAuthor }}
+            </div>
+            <h2>{{ recipe.name }}</h2>
+            <p>{{ recipe.description }}</p>
+            <small>
+              <app-icon name="clock"></app-icon> {{ recipe.minutes }} min ·
+              <app-icon name="servings"></app-icon> {{ recipe.servings }} porções
+            </small>
+            <a class="recipe-link" [routerLink]="['/receita', recipe.id]">
+              Ver receita <app-icon name="arrow-up-right"></app-icon>
+            </a>
+          </div>
+        </div>
+      </section>
+    }
+  </div>
 </div>

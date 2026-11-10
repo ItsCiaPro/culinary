@@ -3,10 +3,11 @@ import { RouterLink } from "@angular/router";
 import { SectionComponent } from "../section/section.component";
 import { PantryService } from "../pantry.service";
 import { RECIPES, matchRecipe } from "../data";
+import { IconComponent } from "../shared/icon.component";
 
 @Component({
   standalone: true,
-  imports: [RouterLink, SectionComponent],
+  imports: [RouterLink, SectionComponent, IconComponent],
   templateUrl: "./home.component.html",
   styleUrl: "./home.component.css",
 })

@@ -10,7 +10,7 @@
   height: 100vh;
   flex-shrink: 0;
   background: var(--green);
-  color: #f8f4e9;
+  color: var(--cor-creme-texto);
   padding: 34px 22px;
   display: flex;
   flex-direction: column;
@@ -33,6 +33,12 @@
   display: grid;
   place-items: center;
   font-size: 22px;
+  color: var(--cor-marrom-escuro);
+}
+
+.brand-icon app-icon {
+  width: 28px;
+  height: 28px;
 }
 
 .sidebar nav {
@@ -47,14 +53,14 @@
   gap: 13px;
   padding: 13px 15px;
   border-radius: 13px;
-  color: #e5e9e3;
+  color: var(--cor-creme-texto);
   font-size: 14px;
   transition: 0.2s;
 }
 
 .sidebar nav a:hover,
 .sidebar nav a.active {
-  background: #e8bd68;
+  background: var(--cor-dourado);
   color: var(--green);
 }
 
@@ -72,7 +78,7 @@
 
 .side-note {
   margin-top: auto;
-  color: #bdc8bf;
+  color: var(--cor-creme-texto);
   font-size: 12px;
   line-height: 1.6;
 }
@@ -85,6 +91,10 @@
 
 .hero {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
   background: var(--green);
   border-radius: 28px;
   padding: 25px 32px;
@@ -113,14 +123,43 @@
   align-items: center;
   gap: 12px;
   max-width: 560px;
+  width: min(100%, 560px);
+  flex: 1 1 560px;
   background: var(--paper);
   border-radius: 40px;
   padding: 11px 15px;
   color: var(--muted);
 }
 
-.search span {
-  font-size: 25px;
+.profile-link {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  place-items: center;
+  border: 1px solid #f8edd84d;
+  border-radius: 50%;
+  color: var(--cor-creme-texto);
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.profile-link app-icon {
+  width: 21px;
+  height: 21px;
+}
+
+.profile-link:hover,
+.profile-link:focus-visible {
+  background: var(--cor-dourado);
+  color: var(--cor-marrom-escuro);
+}
+
+.search-pot {
+  width: 26px;
+  height: 26px;
+  color: var(--cor-marrom-medio);
 }
 
 .search input {
@@ -132,6 +171,8 @@
 }
 
 .search button {
+  display: grid;
+  place-items: center;
   border: 0;
   background: var(--gold);
   color: var(--green);
@@ -141,14 +182,55 @@
   font-weight: 800;
 }
 
+.search button app-icon {
+  width: 18px;
+  height: 18px;
+}
+
 .mobile-brand,
 .mobile-nav {
   display: none;
 }
 
+.sidebar nav app-icon {
+  width: 20px;
+  height: 20px;
+}
+
 main {
   max-width: 1200px;
   margin: auto;
+}
+
+.layout.video-mode {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.layout.video-mode .main {
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.layout.video-mode main {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+  overflow: hidden;
+}
+
+.layout.video-mode app-videos {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 @media (max-width: 950px) {
@@ -170,8 +252,21 @@ main {
 }
 
 @media (max-width: 650px) {
+  .layout.video-mode {
+    display: block;
+  }
+}
+
+@media (max-width: 650px) {
   .sidebar {
     display: none;
+  }
+}
+
+@media (max-width: 650px) {
+  .layout.video-mode .main {
+    width: 100%;
+    padding: 0;
   }
 }
 
@@ -183,9 +278,16 @@ main {
 
 @media (max-width: 650px) {
   .hero {
+    display: block;
     border-radius: 0 0 27px 27px;
     padding: 14px 18px 22px;
     margin: 0 0 22px;
+  }
+}
+
+@media (max-width: 650px) {
+  .profile-link {
+    display: none;
   }
 }
 
@@ -200,6 +302,17 @@ main {
       serif;
     margin-bottom: 12px;
   }
+}
+
+.mobile-brand .mobile-brand-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mobile-brand .mobile-brand-name app-icon {
+  width: 26px;
+  height: 26px;
 }
 
 @media (max-width: 650px) {
@@ -234,7 +347,7 @@ main {
     border-radius: 30px;
     padding: 7px 3px;
     justify-content: space-around;
-    box-shadow: 0 8px 25px #17251e40;
+    box-shadow: 0 8px 25px #40230640;
   }
 }
 
@@ -245,7 +358,7 @@ main {
     flex-direction: column;
     align-items: center;
     gap: 2px;
-    color: #d8e0d9;
+    color: var(--cor-creme-texto);
     padding: 5px 0;
     border-radius: 22px;
   }
@@ -260,7 +373,13 @@ main {
 
 @media (max-width: 650px) {
   .mobile-nav span {
-    font-size: 18px;
+    display: grid;
+    place-items: center;
+  }
+
+  .mobile-nav app-icon {
+    width: 19px;
+    height: 19px;
   }
 }
 

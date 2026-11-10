@@ -2,10 +2,11 @@ import { Component, inject } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { RECIPES, matchRecipe } from "../data";
 import { PantryService } from "../pantry.service";
+import { IconComponent } from "../shared/icon.component";
 
 @Component({
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, IconComponent],
   templateUrl: "./recipe-detail.component.html",
   styleUrl: "./recipe-detail.component.css",
 })

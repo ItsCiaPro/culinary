@@ -6,10 +6,11 @@ import {
   RouterOutlet,
 } from "@angular/router";
 import { PantryService } from "./pantry.service";
+import { IconComponent, type IconName } from "./shared/icon.component";
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, IconComponent],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
 })
@@ -17,13 +18,16 @@ export class AppComponent {
   pantry = inject(PantryService);
   router = inject(Router);
   query = "";
-  nav = [
-    { path: "/", label: "Início", icon: "⌂" },
-    { path: "/receitas", label: "Receitas", icon: "♨" },
-    { path: "/videos", label: "Vídeos", icon: "▶" },
-    { path: "/postar", label: "Postar", icon: "✎" },
-    { path: "/despensa", label: "Despensa", icon: "▣" },
-    { path: "/compras", label: "Compras", icon: "🛒" },
+  get isVideosPage(): boolean {
+    return this.router.url.startsWith("/videos");
+  }
+  nav: { path: string; label: string; icon: IconName }[] = [
+    { path: "/", label: "Início", icon: "home" },
+    { path: "/receitas", label: "Receitas", icon: "recipe" },
+    { path: "/videos", label: "Vídeos", icon: "video" },
+    { path: "/postar", label: "Postar", icon: "edit" },
+    { path: "/despensa", label: "Despensa", icon: "pantry" },
+    { path: "/compras", label: "Compras", icon: "cart" },
   ];
   search(e: Event) {
     e.preventDefault();

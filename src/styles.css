@@ -1,16 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap");
 
 :root {
-  --green: #263c32;
-  --green2: #385b49;
-  --cream: #f7f3e9;
-  --paper: #fffdf8;
-  --ink: #26352d;
-  --muted: #788078;
-  --line: #e8e3d8;
-  --terracotta: #c46c4c;
-  --herb: #4c755d;
-  --gold: #e8bd68;
+  --cor-fundo: #f3e4cd;
+  --cor-cartao: #faf3e5;
+  --cor-marrom-escuro: #402306;
+  --cor-creme-texto: #f8edd8;
+  --cor-marrom-medio: #6f5947;
+  --cor-terracota: #c7692c;
+  --cor-verde-folha: #48773e;
+  --cor-verde-claro: #d0e6c5;
+  --cor-dourado: #ebc166;
+  --cor-cacau: #835f53;
+  --cor-borda: #d8c8b2;
+  --green: var(--cor-marrom-escuro);
+  --green2: var(--cor-cacau);
+  --cream: var(--cor-fundo);
+  --paper: var(--cor-cartao);
+  --ink: var(--cor-marrom-escuro);
+  --muted: var(--cor-marrom-medio);
+  --line: var(--cor-borda);
+  --terracotta: var(--cor-terracota);
+  --herb: var(--cor-verde-folha);
+  --gold: var(--cor-dourado);
 }
 
 * {
@@ -43,9 +54,9 @@ a {
 
 .soft {
   background: var(--paper);
-  border: 1px solid #eee9df;
+  border: 1px solid var(--line);
   border-radius: 22px;
-  box-shadow: 0 5px 24px #263c3208;
+  box-shadow: 0 5px 24px #40230608;
 }
 
 h1,
@@ -68,7 +79,7 @@ p {
   border: 0;
   border-radius: 30px;
   background: var(--green);
-  color: white;
+  color: var(--cor-creme-texto);
   padding: 12px 20px;
   font-size: 13px;
   font-weight: 700;
@@ -94,7 +105,7 @@ p {
 
 .recipe-card {
   background: var(--paper);
-  border: 1px solid #eee9df;
+  border: 1px solid var(--line);
   border-radius: 18px;
   overflow: hidden;
   transition:
@@ -104,7 +115,7 @@ p {
 
 .recipe-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 28px #263c3215;
+  box-shadow: 0 10px 28px #40230615;
 }
 
 .recipe-card img {
@@ -120,7 +131,7 @@ p {
 
 .rating {
   font-size: 11px;
-  color: #b07b22;
+  color: var(--cor-dourado);
   font-weight: 800;
 }
 
@@ -167,7 +178,7 @@ p {
 }
 
 .pills button {
-  border: 1px solid #dcd7cc;
+  border: 1px solid var(--line);
   border-radius: 30px;
   background: var(--paper);
   padding: 9px 16px;
@@ -178,7 +189,7 @@ p {
 .pills button.selected {
   background: var(--green);
   border-color: var(--green);
-  color: white;
+  color: var(--cor-creme-texto);
 }
 
 .field {
@@ -204,7 +215,7 @@ p {
 }
 
 .tags span {
-  background: #e9eee7;
+  background: var(--cor-verde-claro);
   border-radius: 20px;
   padding: 7px 10px;
   font-size: 12px;

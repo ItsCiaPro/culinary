@@ -1,3 +1,18 @@
+import type { IconName } from "./shared/icon.component";
+
+interface Category {
+  id: string;
+  name: string;
+  icon: IconName;
+  items: string[];
+}
+
+interface Machine {
+  id: string;
+  name: string;
+  icon: IconName;
+}
+
 export interface Recipe {
   id: string;
   name: string;
@@ -10,11 +25,11 @@ export interface Recipe {
   machines: string[];
   steps: string[];
 }
-export const CATEGORIES = [
+export const CATEGORIES: Category[] = [
   {
     id: "vegetais",
     name: "Vegetais e Legumes",
-    emoji: "🥬",
+    icon: "leaf" satisfies IconName,
     items: [
       "Tomate",
       "Alface",
@@ -29,13 +44,13 @@ export const CATEGORIES = [
   {
     id: "carnes",
     name: "Carnes",
-    emoji: "🥩",
+    icon: "meat" satisfies IconName,
     items: ["Carne moída", "Frango", "Presunto", "Bacon"],
   },
   {
     id: "laticinios",
     name: "Laticínios",
-    emoji: "🥛",
+    icon: "dairy" satisfies IconName,
     items: [
       "Leite",
       "Ovo",
@@ -49,13 +64,13 @@ export const CATEGORIES = [
   {
     id: "graos",
     name: "Grãos e Cereais",
-    emoji: "🌾",
+    icon: "grain" satisfies IconName,
     items: ["Arroz", "Polvilho", "Farinha de trigo", "Milho"],
   },
   {
     id: "frutas",
     name: "Frutas",
-    emoji: "🍎",
+    icon: "fruit" satisfies IconName,
     items: [
       "Maçã",
       "Morango",
@@ -70,31 +85,31 @@ export const CATEGORIES = [
   {
     id: "temperos",
     name: "Temperos",
-    emoji: "🧂",
+    icon: "seasoning" satisfies IconName,
     items: ["Sal", "Pimenta", "Azeite", "Óleo", "Açúcar", "Chocolate em pó"],
   },
   {
     id: "enlatados",
     name: "Enlatados",
-    emoji: "🥫",
+    icon: "can" satisfies IconName,
     items: ["Molho de tomate", "Ervilha", "Atum"],
   },
   {
     id: "massas",
     name: "Massas e pães",
-    emoji: "🍞",
+    icon: "bread" satisfies IconName,
     items: ["Macarrão", "Pão de hambúrguer", "Pão"],
   },
 ];
-export const MACHINES = [
-  { id: "fogao", name: "Fogão", emoji: "🔥" },
-  { id: "microondas", name: "Micro-ondas", emoji: "📟" },
-  { id: "airfryer", name: "Airfryer", emoji: "🍟" },
-  { id: "panela", name: "Panela Elétrica", emoji: "🍲" },
-  { id: "geladeira", name: "Geladeira", emoji: "🧊" },
-  { id: "liquidificador", name: "Liquidificador", emoji: "🥤" },
-  { id: "forno", name: "Forno Elétrico", emoji: "♨️" },
-  { id: "churrasqueira", name: "Churrasqueira", emoji: "🍖" },
+export const MACHINES: Machine[] = [
+  { id: "fogao", name: "Fogão", icon: "stove" satisfies IconName },
+  { id: "microondas", name: "Micro-ondas", icon: "microwave" satisfies IconName },
+  { id: "airfryer", name: "Airfryer", icon: "airfryer" satisfies IconName },
+  { id: "panela", name: "Panela Elétrica", icon: "cooker" satisfies IconName },
+  { id: "geladeira", name: "Geladeira", icon: "fridge" satisfies IconName },
+  { id: "liquidificador", name: "Liquidificador", icon: "blender" satisfies IconName },
+  { id: "forno", name: "Forno Elétrico", icon: "oven" satisfies IconName },
+  { id: "churrasqueira", name: "Churrasqueira", icon: "grill" satisfies IconName },
 ];
 export const RECIPES: Recipe[] = [
   {
@@ -236,6 +251,326 @@ export const RECIPES: Recipe[] = [
     ingredients: ["Sorvete", "Leite", "Morango"],
     machines: ["liquidificador"],
     steps: ["Bata tudo no liquidificador.", "Sirva num copo gelado."],
+  },
+  {
+    id: "panqueca-de-queijo",
+    name: "Panqueca de Queijo",
+    image: "panqueca-de-queijo.jpg",
+    minutes: 25,
+    rating: 4.6,
+    servings: 3,
+    description: "Massa dourada recheada com queijo derretido.",
+    ingredients: ["Farinha de trigo", "Ovo", "Leite", "Queijo", "Manteiga", "Sal"],
+    machines: ["fogao"],
+    steps: [
+      "Bata a farinha, o ovo, o leite e uma pitada de sal até formar uma massa lisa.",
+      "Unte uma frigideira com manteiga e espalhe uma porção da massa.",
+      "Doure dos dois lados, recheie com queijo e dobre para servir.",
+    ],
+  },
+  {
+    id: "bolo-de-cenoura",
+    name: "Bolo de Cenoura",
+    image: "bolo-de-cenoura.jpg",
+    minutes: 50,
+    rating: 4.8,
+    servings: 10,
+    description: "Bolo fofinho de cenoura com cobertura de chocolate.",
+    ingredients: ["Cenoura", "Ovo", "Farinha de trigo", "Açúcar", "Óleo", "Chocolate em pó"],
+    machines: ["liquidificador", "forno"],
+    steps: [
+      "Bata a cenoura, os ovos, o açúcar e o óleo no liquidificador.",
+      "Misture com a farinha e despeje numa forma untada.",
+      "Asse a 180°C até dourar e cubra com chocolate em pó preparado com leite.",
+    ],
+  },
+  {
+    id: "sopa-de-legumes",
+    name: "Sopa de Legumes",
+    image: "sopa-de-legumes.jpg",
+    minutes: 35,
+    rating: 4.4,
+    servings: 4,
+    description: "Uma sopa caseira leve, colorida e reconfortante.",
+    ingredients: ["Batata", "Cenoura", "Cebola", "Alho", "Azeite", "Sal"],
+    machines: ["fogao", "panela"],
+    steps: [
+      "Refogue a cebola e o alho no azeite.",
+      "Junte a batata e a cenoura picadas, cubra com água e cozinhe até amaciar.",
+      "Acerte o sal e sirva quente.",
+    ],
+  },
+  {
+    id: "frango-assado-com-batata",
+    name: "Frango Assado com Batata",
+    image: "frango-assado-com-batata.jpg",
+    minutes: 55,
+    rating: 4.7,
+    servings: 4,
+    description: "Frango bem temperado assado junto com batatas douradas.",
+    ingredients: ["Frango", "Batata", "Alho", "Azeite", "Sal", "Pimenta"],
+    machines: ["forno", "airfryer"],
+    steps: [
+      "Tempere o frango com alho, sal, pimenta e azeite.",
+      "Corte as batatas e acomode tudo numa assadeira.",
+      "Asse a 200°C até o frango ficar cozido e dourado.",
+    ],
+  },
+  {
+    id: "torta-de-frango",
+    name: "Torta de Frango",
+    image: "torta-de-frango.jpg",
+    minutes: 50,
+    rating: 4.5,
+    servings: 8,
+    description: "Torta assada com recheio cremoso de frango e queijo.",
+    ingredients: ["Frango", "Farinha de trigo", "Ovo", "Leite", "Queijo", "Cebola", "Creme de leite"],
+    machines: ["fogao", "forno"],
+    steps: [
+      "Cozinhe e desfie o frango, refogando-o com cebola e creme de leite.",
+      "Prepare uma massa simples com farinha, ovo e leite.",
+      "Monte a torta, acrescente o queijo e asse a 180°C até dourar.",
+    ],
+  },
+  {
+    id: "sanduiche-caprese",
+    name: "Sanduíche Caprese",
+    image: "sanduiche-caprese.jpg",
+    minutes: 10,
+    rating: 4.3,
+    servings: 2,
+    description: "Sanduíche fresco com tomate, queijo e manjericão.",
+    ingredients: ["Pão", "Tomate", "Queijo", "Manjericão", "Azeite"],
+    machines: [],
+    steps: [
+      "Corte o pão e distribua as fatias de tomate e queijo.",
+      "Acrescente manjericão e um fio de azeite.",
+      "Sirva frio ou aqueça até o queijo começar a derreter.",
+    ],
+  },
+  {
+    id: "bruschetta-de-tomate",
+    name: "Bruschetta de Tomate",
+    image: "bruschetta-de-tomate.jpg",
+    minutes: 15,
+    rating: 4.4,
+    servings: 4,
+    description: "Fatias de pão tostadas com tomate, alho e manjericão.",
+    ingredients: ["Pão", "Tomate", "Alho", "Azeite", "Manjericão", "Sal"],
+    machines: ["forno", "airfryer"],
+    steps: [
+      "Corte o pão em fatias e toste até ficar crocante.",
+      "Misture tomate picado com alho, azeite, manjericão e sal.",
+      "Coloque a mistura sobre o pão e sirva.",
+    ],
+  },
+  {
+    id: "salada-de-frutas",
+    name: "Salada de Frutas",
+    image: "salada-de-frutas.jpg",
+    minutes: 15,
+    rating: 4.6,
+    servings: 4,
+    description: "Combinação refrescante de frutas da estação.",
+    ingredients: ["Maçã", "Morango", "Banana", "Laranja", "Manga", "Abacaxi"],
+    machines: [],
+    steps: [
+      "Lave e descasque as frutas que precisarem.",
+      "Pique tudo em pedaços e misture numa tigela.",
+      "Leve à geladeira antes de servir.",
+    ],
+  },
+  {
+    id: "mousse-de-maracuja",
+    name: "Mousse de Maracujá",
+    image: "mousse-de-maracuja.jpg",
+    minutes: 15,
+    rating: 4.9,
+    servings: 6,
+    description: "Sobremesa aerada, cremosa e com sabor marcante de maracujá.",
+    ingredients: ["Maracujá", "Leite condensado", "Creme de leite"],
+    machines: ["liquidificador", "geladeira"],
+    steps: [
+      "Bata a polpa do maracujá com o leite condensado e o creme de leite.",
+      "Distribua em taças.",
+      "Leve à geladeira até firmar.",
+    ],
+  },
+  {
+    id: "bolo-de-caneca",
+    name: "Bolo de Caneca de Chocolate",
+    image: "bolo-de-caneca.jpg",
+    minutes: 8,
+    rating: 4.2,
+    servings: 1,
+    description: "Um bolo de chocolate individual feito rapidinho.",
+    ingredients: ["Farinha de trigo", "Ovo", "Leite", "Açúcar", "Chocolate em pó"],
+    machines: ["microondas"],
+    steps: [
+      "Misture todos os ingredientes numa caneca grande.",
+      "Leve ao micro-ondas por cerca de 2 minutos.",
+      "Espere amornar antes de comer.",
+    ],
+  },
+  {
+    id: "batata-gratinada",
+    name: "Batata Gratinada",
+    image: "batata-gratinada.jpg",
+    minutes: 40,
+    rating: 4.6,
+    servings: 4,
+    description: "Batatas macias cobertas com creme e queijo gratinado.",
+    ingredients: ["Batata", "Queijo", "Creme de leite", "Alho", "Sal"],
+    machines: ["forno", "airfryer"],
+    steps: [
+      "Cozinhe as batatas em rodelas até ficarem macias.",
+      "Acomode num refratário com creme de leite temperado com alho e sal.",
+      "Cubra com queijo e gratine até dourar.",
+    ],
+  },
+  {
+    id: "strogonoff-de-frango",
+    name: "Strogonoff de Frango",
+    image: "strogonoff-de-frango.jpg",
+    minutes: 30,
+    rating: 4.8,
+    servings: 4,
+    description: "Frango em molho cremoso de tomate e creme de leite.",
+    ingredients: ["Frango", "Creme de leite", "Molho de tomate", "Cebola", "Alho", "Sal", "Pimenta"],
+    machines: ["fogao"],
+    steps: [
+      "Refogue a cebola e o alho e doure o frango em cubos.",
+      "Junte o molho de tomate, sal e pimenta e cozinhe até o frango ficar macio.",
+      "Acrescente o creme de leite, aqueça sem deixar ferver e sirva.",
+    ],
+  },
+  {
+    id: "crepioca-de-queijo",
+    name: "Crepioca de Queijo",
+    image: "crepioca-de-queijo.jpg",
+    minutes: 12,
+    rating: 4.5,
+    servings: 1,
+    description: "Uma crepioca simples, com queijo derretido no recheio.",
+    ingredients: ["Ovo", "Polvilho", "Queijo", "Sal"],
+    machines: ["fogao"],
+    steps: [
+      "Misture o ovo com o polvilho e uma pitada de sal.",
+      "Despeje numa frigideira aquecida e cozinhe dos dois lados.",
+      "Recheie com queijo, dobre e sirva.",
+    ],
+  },
+  {
+    id: "banana-caramelizada",
+    name: "Banana Caramelizada",
+    image: "banana-caramelizada.jpg",
+    minutes: 15,
+    rating: 4.3,
+    servings: 2,
+    description: "Bananas macias envolvidas em uma calda dourada.",
+    ingredients: ["Banana", "Açúcar", "Manteiga"],
+    machines: ["fogao"],
+    steps: [
+      "Derreta o açúcar numa frigideira até formar uma calda dourada.",
+      "Junte a manteiga e as bananas cortadas ao meio.",
+      "Cozinhe rapidamente dos dois lados e sirva ainda quente.",
+    ],
+  },
+  {
+    id: "macarrao-molho-branco",
+    name: "Macarrão ao Molho Branco",
+    image: "macarrao-molho-branco.jpg",
+    minutes: 25,
+    rating: 4.5,
+    servings: 3,
+    description: "Macarrão envolvido num molho branco cremoso e suave.",
+    ingredients: ["Macarrão", "Leite", "Manteiga", "Queijo", "Creme de leite", "Sal"],
+    machines: ["fogao", "panela"],
+    steps: [
+      "Cozinhe o macarrão em água com sal e escorra.",
+      "Aqueça o leite com a manteiga e misture o queijo até derreter.",
+      "Finalize com creme de leite, envolva o macarrão no molho e sirva.",
+    ],
+  },
+  {
+    id: "arroz-cremoso-de-milho",
+    name: "Arroz Cremoso de Milho",
+    image: "arroz-cremoso-de-milho.jpg",
+    minutes: 25,
+    rating: 4.4,
+    servings: 4,
+    description: "Arroz de forno cremoso com milho e queijo gratinado.",
+    ingredients: ["Arroz", "Milho", "Creme de leite", "Queijo", "Sal"],
+    machines: ["forno", "panela"],
+    steps: [
+      "Misture o arroz cozido com milho e creme de leite.",
+      "Transfira para um refratário e cubra com queijo.",
+      "Leve ao forno até aquecer e gratinar.",
+    ],
+  },
+  {
+    id: "pizza-de-frigideira",
+    name: "Pizza de Frigideira",
+    image: "pizza-de-frigideira.jpg",
+    minutes: 20,
+    rating: 4.5,
+    servings: 2,
+    description: "Pizza prática de frigideira com queijo e tomate.",
+    ingredients: ["Farinha de trigo", "Leite", "Molho de tomate", "Queijo", "Tomate", "Sal"],
+    machines: ["fogao"],
+    steps: [
+      "Misture farinha, leite e sal até formar uma massa macia.",
+      "Abra a massa na frigideira e cozinhe em fogo baixo.",
+      "Vire, espalhe molho de tomate, queijo e tomate e tampe até derreter.",
+    ],
+  },
+  {
+    id: "rabanada-simples",
+    name: "Rabanada Simples",
+    image: "rabanada-simples.jpg",
+    minutes: 20,
+    rating: 4.6,
+    servings: 4,
+    description: "Pão dourado na manteiga com uma cobertura açucarada.",
+    ingredients: ["Pão", "Ovo", "Leite", "Açúcar", "Manteiga"],
+    machines: ["fogao"],
+    steps: [
+      "Corte o pão em fatias e passe rapidamente no leite e no ovo batido.",
+      "Doure as fatias numa frigideira com manteiga.",
+      "Finalize com açúcar e sirva morna.",
+    ],
+  },
+  {
+    id: "omelete-de-queijo-e-cebola",
+    name: "Omelete de Queijo e Cebola",
+    image: "omelete-de-queijo-e-cebola.jpg",
+    minutes: 15,
+    rating: 4.4,
+    servings: 2,
+    description: "Omelete fofinha com queijo derretido e cebola dourada.",
+    ingredients: ["Ovo", "Queijo", "Cebola", "Sal", "Azeite"],
+    machines: ["fogao"],
+    steps: [
+      "Doure a cebola no azeite.",
+      "Bata os ovos com sal, despeje na frigideira e acrescente o queijo.",
+      "Cozinhe até firmar, dobre e sirva.",
+    ],
+  },
+  {
+    id: "risoto-de-tomate",
+    name: "Risoto de Tomate e Manjericão",
+    image: "risoto-de-tomate.jpg",
+    minutes: 35,
+    rating: 4.6,
+    servings: 3,
+    description: "Arroz cremoso com tomate, queijo e manjericão fresco.",
+    ingredients: ["Arroz", "Tomate", "Cebola", "Alho", "Azeite", "Queijo", "Manjericão", "Sal"],
+    machines: ["fogao", "panela"],
+    steps: [
+      "Refogue cebola e alho no azeite e junte o arroz.",
+      "Acrescente tomate picado e água aos poucos, mexendo até o arroz cozinhar.",
+      "Finalize com queijo e manjericão e sirva imediatamente.",
+    ],
   },
 ];
 export function matchRecipe(

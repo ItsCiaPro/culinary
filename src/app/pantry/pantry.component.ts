@@ -3,10 +3,11 @@ import { FormsModule } from "@angular/forms";
 import { RouterLink } from "@angular/router";
 import { CATEGORIES, MACHINES } from "../data";
 import { PantryService } from "../pantry.service";
+import { IconComponent } from "../shared/icon.component";
 
 @Component({
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, IconComponent],
   templateUrl: "./pantry.component.html",
   styleUrl: "./pantry.component.css",
 })

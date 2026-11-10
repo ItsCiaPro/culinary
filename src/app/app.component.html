@@ -1,8 +1,8 @@
-<div class="layout">
+<div class="layout" [class.video-mode]="isVideosPage">
   <aside class="sidebar">
     <a routerLink="/" class="brand">
-      <span class="brand-icon">🍳</span>
-      <span>Despensa</span>
+      <span class="brand-icon"><app-icon name="pot"></app-icon></span>
+      <span>Cook Today</span>
     </a>
     <nav>
       @for (item of nav; track item.path) {
@@ -11,7 +11,7 @@
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: item.path === '/' }"
         >
-          <span>{{ item.icon }}</span>
+          <app-icon [name]="item.icon"></app-icon>
           {{ item.label }}
           @if (item.path === "/compras" && pantry.shopping().length) {
             <b class="count">{{ pantry.shopping().length }}</b>
@@ -23,35 +23,46 @@
   </aside>
 
   <div class="main">
-    <header class="hero">
-      <div class="mobile-brand">
-        <a routerLink="/">🍳 Despensa</a>
-        <a routerLink="/entrar">👤</a>
-      </div>
-      <form class="search" (submit)="search($event)">
-        <span>⌕</span>
-        <input
-          name="q"
-          [value]="query"
-          (input)="query = $any($event.target).value"
-          placeholder="Pesquise sua próxima receita"
-        />
-        <button aria-label="Pesquisar">→</button>
-      </form>
-    </header>
+    @if (!isVideosPage) {
+      <header class="hero">
+        <div class="mobile-brand">
+          <a routerLink="/" class="mobile-brand-name">
+            <app-icon name="pot"></app-icon> Cook Today
+          </a>
+          <a routerLink="/entrar" aria-label="Entrar">
+            <app-icon name="user"></app-icon>
+          </a>
+        </div>
+        <form class="search" (submit)="search($event)">
+          <app-icon class="search-pot" name="pot"></app-icon>
+          <input
+            name="q"
+            [value]="query"
+            (input)="query = $any($event.target).value"
+            placeholder="Pesquise sua próxima receita"
+          />
+          <button aria-label="Pesquisar"><app-icon name="arrow-right"></app-icon></button>
+        </form>
+        <a class="profile-link" routerLink="/entrar" aria-label="Entrar ou acessar o perfil">
+          <app-icon name="user"></app-icon>
+        </a>
+      </header>
+    }
     <main><router-outlet /></main>
   </div>
 
-  <nav class="mobile-nav">
-    @for (item of nav; track item.path) {
-      <a
-        [routerLink]="item.path"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: item.path === '/' }"
-      >
-        <span>{{ item.icon }}</span>
-        <small>{{ item.label }}</small>
-      </a>
-    }
-  </nav>
+  @if (!isVideosPage) {
+    <nav class="mobile-nav">
+      @for (item of nav; track item.path) {
+        <a
+          [routerLink]="item.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+        >
+          <app-icon [name]="item.icon"></app-icon>
+          <small>{{ item.label }}</small>
+        </a>
+      }
+    </nav>
+  }
 </div>

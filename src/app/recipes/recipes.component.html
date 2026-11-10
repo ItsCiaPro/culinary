@@ -13,9 +13,12 @@
     <a class="recipe-card" [routerLink]="['/receita', m.recipe.id]"
       ><img [src]="'assets/' + m.recipe.image" [alt]="m.recipe.name" />
       <div class="recipe-info">
-        <span class="rating">★ {{ m.recipe.rating }}</span>
+        <span class="rating"><app-icon name="star"></app-icon> {{ m.recipe.rating }}</span>
         <h3>{{ m.recipe.name }}</h3>
-        <p>◷ {{ m.recipe.minutes }} min · {{ m.recipe.servings }} porções</p>
+        <p>
+          <app-icon name="clock"></app-icon> {{ m.recipe.minutes }} min ·
+          <app-icon name="servings"></app-icon> {{ m.recipe.servings }} porções
+        </p>
         @if (m.missing.length) {
           <small>Faltam: {{ m.missing.join(", ") }}</small>
         }

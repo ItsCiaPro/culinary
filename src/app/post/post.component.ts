@@ -1,9 +1,10 @@
 import { Component } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { IconComponent } from "../shared/icon.component";
 
 @Component({
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, IconComponent],
   templateUrl: "./post.component.html",
   styleUrl: "./post.component.css",
 })

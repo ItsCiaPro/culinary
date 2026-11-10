@@ -9,7 +9,7 @@
           [class.chosen]="cat === c.id && !q"
           (click)="cat = c.id; q = ''"
         >
-          <span>{{ c.emoji }}</span
+          <span><app-icon [name]="c.icon"></app-icon></span
           >{{ c.name }}
         </button>
       }
@@ -17,7 +17,7 @@
     <input
       class="field search-field"
       [(ngModel)]="q"
-      placeholder="⌕ Pesquisar ingrediente"
+      placeholder="Pesquisar ingrediente"
     />
     <div class="pills ingredient-pills">
       @for (i of items(); track i) {
@@ -25,7 +25,10 @@
           [class.selected]="pantry.ingredients().includes(i)"
           (click)="pantry.toggleIngredient(i)"
         >
-          {{ pantry.ingredients().includes(i) ? "✓ " : "" }}{{ i }}
+          @if (pantry.ingredients().includes(i)) {
+            <app-icon name="check"></app-icon>
+          }
+          {{ i }}
         </button>
       }
     </div>
@@ -37,7 +40,7 @@
           [class.chosen]="pantry.machines().includes(m.id)"
           (click)="pantry.toggleMachine(m.id)"
         >
-          <span>{{ m.emoji }}</span
+          <span><app-icon [name]="m.icon"></app-icon></span
           >{{ m.name }}
         </button>
       }
@@ -45,11 +48,16 @@
   </section>
   <aside class="soft selected-box">
     <h3>Selecionados ({{ pantry.ingredients().length }})</h3>
-    <button class="clear" (click)="pantry.clear()">Limpar ×</button>
+    <button class="clear" (click)="pantry.clear()">
+      Limpar <app-icon name="close"></app-icon>
+    </button>
     <div class="tags">
       @for (i of pantry.ingredients(); track i) {
         <span
-          >{{ i }} <button (click)="pantry.toggleIngredient(i)">×</button></span
+          >{{ i }}
+          <button (click)="pantry.toggleIngredient(i)" [attr.aria-label]="'Remover ' + i">
+            <app-icon name="close"></app-icon>
+          </button></span
         >
       } @empty {
         <p class="muted">Nenhum ingrediente ainda.</p>

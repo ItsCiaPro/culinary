@@ -38,7 +38,9 @@
     @for (i of ingredients; track i) {
       <span
         >{{ i }}
-        <button type="button" (click)="removeIngredient(i)">×</button></span
+        <button type="button" (click)="removeIngredient(i)" [attr.aria-label]="'Remover ' + i">
+          <app-icon name="close"></app-icon>
+        </button></span
       >
     }
   </div>
@@ -52,6 +54,6 @@
     />
   }
   <button type="button" class="text-btn" (click)="steps.push('')">
-    ＋ Adicionar passo</button
+    <app-icon name="plus"></app-icon> Adicionar passo</button
   ><button class="primary-btn full">Publicar receita</button>
 </form>

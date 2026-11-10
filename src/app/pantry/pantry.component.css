@@ -31,8 +31,7 @@
 }
 
 .category span {
-  font-size: 25px;
-  background: #f1ede3;
+  background: var(--cor-fundo);
   border-radius: 50%;
   width: 43px;
   height: 43px;
@@ -40,10 +39,21 @@
   place-items: center;
 }
 
+.category span app-icon {
+  width: 23px;
+  height: 23px;
+  color: var(--cor-marrom-medio);
+}
+
+.category.chosen span app-icon,
+.machine.chosen span app-icon {
+  color: var(--cor-marrom-escuro);
+}
+
 .category.chosen,
 .machine.chosen {
   outline: 2px solid var(--green);
-  background: #edf1e9;
+  background: var(--cor-verde-claro);
 }
 
 .ingredient-pills {
@@ -61,7 +71,20 @@
 }
 
 .machine span {
-  font-size: 26px;
+  display: grid;
+  place-items: center;
+  color: var(--cor-marrom-medio);
+}
+
+.machine span app-icon {
+  width: 25px;
+  height: 25px;
+}
+
+.clear app-icon,
+.tags app-icon {
+  width: 14px;
+  height: 14px;
 }
 
 .selected-box {

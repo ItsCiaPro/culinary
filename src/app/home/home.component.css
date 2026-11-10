@@ -32,7 +32,7 @@
 }
 
 .almost {
-  background: #eaf0e8;
+  background: var(--cor-verde-claro);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

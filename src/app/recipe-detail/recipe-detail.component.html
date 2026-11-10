@@ -1,21 +1,22 @@
 @if (recipe) {
-  <a class="back" routerLink="/receitas">← Voltar</a>
+  <a class="back" routerLink="/receitas"><app-icon name="arrow-left"></app-icon> Voltar</a>
   <div class="detail">
     <img [src]="'assets/' + recipe.image" [alt]="recipe.name" />
     <section>
       <h1>{{ recipe.name }}</h1>
       <p class="muted">{{ recipe.description }}</p>
       <p>
-        ★ {{ recipe.rating }}　◷ {{ recipe.minutes }} min　♧
-        {{ recipe.servings }} porções
+        <app-icon name="star"></app-icon> {{ recipe.rating }}
+        <app-icon name="clock"></app-icon> {{ recipe.minutes }} min
+        <app-icon name="servings"></app-icon> {{ recipe.servings }} porções
       </p>
       <div class="soft status">
         @if (!missing.length) {
-          Você tem tudo! Mãos à obra. 🎉
+          Você tem tudo! Mãos à obra.
         } @else {
           <b>Faltam {{ missing.length }}:</b> {{ missing.join(", ")
           }}<button class="primary-btn" (click)="pantry.addShopping(missing)">
-            🛒 Adicionar às compras
+            <app-icon name="cart"></app-icon> Adicionar às compras
           </button>
         }
       </div>

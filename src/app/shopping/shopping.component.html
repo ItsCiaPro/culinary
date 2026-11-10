@@ -3,8 +3,12 @@
 <div class="soft shopping-list">
   @for (i of pantry.shopping(); track i) {
     <div class="shopping-row">
-      <button class="buy" (click)="pantry.buy(i)">✓</button><span>{{ i }}</span
-      ><button class="remove" (click)="pantry.removeShopping(i)">×</button>
+      <button class="buy" (click)="pantry.buy(i)" [attr.aria-label]="'Marcar ' + i + ' como comprado'">
+        <app-icon name="check"></app-icon>
+      </button><span>{{ i }}</span
+      ><button class="remove" (click)="pantry.removeShopping(i)" [attr.aria-label]="'Remover ' + i">
+        <app-icon name="close"></app-icon>
+      </button>
     </div>
   } @empty {
     <p class="empty">
