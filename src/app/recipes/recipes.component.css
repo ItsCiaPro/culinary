@@ -1,0 +1,14 @@
+.recipe-section {
+  margin: 28px 0 36px;
+}
+
+.recipe-section h2 {
+  margin-bottom: 14px;
+  font: 700 24px "Playfair Display", serif;
+}
+
+.new-recipe {
+  color: var(--herb);
+  font-size: 11px;
+  font-weight: 800;
+}

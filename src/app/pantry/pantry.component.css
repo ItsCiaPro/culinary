@@ -148,3 +148,38 @@
   margin-top: 20px;
   border-radius: 30px;
 }
+
+.custom-heading {
+  margin: 22px 0 10px;
+  font-size: 15px;
+}
+
+.custom-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 9px;
+}
+
+.custom-entry .primary-btn {
+  margin-top: 0;
+  white-space: nowrap;
+}
+
+.custom-entry .primary-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.custom-pills {
+  margin-top: 10px;
+}
+
+.custom-machine-grid {
+  margin-top: 12px;
+}
+
+@media (max-width: 420px) {
+  .custom-entry {
+    grid-template-columns: 1fr;
+  }
+}

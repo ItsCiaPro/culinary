@@ -32,6 +32,31 @@
         </button>
       }
     </div>
+    <h3 class="custom-heading">Meus ingredientes</h3>
+    <form class="custom-entry" (submit)="addCustomIngredient($event)">
+      <input
+        class="field"
+        [(ngModel)]="customIngredient"
+        name="customIngredient"
+        placeholder="Adicionar ingrediente não listado"
+      />
+      <button class="primary-btn" type="submit" [disabled]="!customIngredient.trim()">Adicionar</button>
+    </form>
+    @if (pantry.customIngredients().length) {
+      <div class="pills ingredient-pills custom-pills">
+        @for (i of pantry.customIngredients(); track i) {
+          <button
+            [class.selected]="pantry.ingredients().includes(i)"
+            (click)="pantry.toggleIngredient(i)"
+          >
+            @if (pantry.ingredients().includes(i)) {
+              <app-icon name="check"></app-icon>
+            }
+            {{ i }}
+          </button>
+        }
+      </div>
+    }
     <h2 class="subheading">Máquinas disponíveis</h2>
     <div class="machine-grid">
       @for (m of machines; track m.id) {
@@ -45,6 +70,29 @@
         </button>
       }
     </div>
+    <h3 class="custom-heading">Outra máquina</h3>
+    <form class="custom-entry" (submit)="addCustomMachine($event)">
+      <input
+        class="field"
+        [(ngModel)]="customMachine"
+        name="customMachine"
+        placeholder="Adicionar máquina não listada"
+      />
+      <button class="primary-btn" type="submit" [disabled]="!customMachine.trim()">Adicionar</button>
+    </form>
+    @if (pantry.customMachines().length) {
+      <div class="machine-grid custom-machine-grid">
+        @for (m of pantry.customMachines(); track m.id) {
+          <button
+            class="machine"
+            [class.chosen]="pantry.machines().includes(m.id)"
+            (click)="pantry.toggleMachine(m.id)"
+          >
+            <span><app-icon name="pot"></app-icon></span>{{ m.name }}
+          </button>
+        }
+      </div>
+    }
   </section>
   <aside class="soft selected-box">
     <h3>Selecionados ({{ pantry.ingredients().length }})</h3>

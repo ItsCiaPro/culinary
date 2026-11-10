@@ -1,30 +1,36 @@
 <h1 class="page-title">
   {{ q ? "Resultados para “" + q + "”" : "Receitas" }}
 </h1>
-<div class="pills">
-  @for (f of filters; track f) {
-    <button [class.selected]="filter === f" (click)="filter = f">
-      {{ f }}
-    </button>
-  }
-</div>
-<div class="recipe-grid">
-  @for (m of list(); track m.recipe.id) {
-    <a class="recipe-card" [routerLink]="['/receita', m.recipe.id]"
-      ><img [src]="'assets/' + m.recipe.image" [alt]="m.recipe.name" />
-      <div class="recipe-info">
-        <span class="rating"><app-icon name="star"></app-icon> {{ m.recipe.rating }}</span>
-        <h3>{{ m.recipe.name }}</h3>
-        <p>
-          <app-icon name="clock"></app-icon> {{ m.recipe.minutes }} min ·
-          <app-icon name="servings"></app-icon> {{ m.recipe.servings }} porções
-        </p>
-        @if (m.missing.length) {
-          <small>Faltam: {{ m.missing.join(", ") }}</small>
-        }
-      </div></a
-    >
-  } @empty {
-    <p class="empty">Nada por aqui ainda.</p>
-  }
-</div>
+@for (section of [
+  { title: "Você pode fazer agora", recipes: ready },
+  { title: "Falta pouco", recipes: almost },
+  { title: "Outras receitas", recipes: rest },
+]; track section.title) {
+  <section class="recipe-section">
+    <h2>{{ section.title }}</h2>
+    <div class="recipe-grid">
+      @for (m of section.recipes; track m.recipe.id) {
+        <a class="recipe-card" [routerLink]="['/receita', m.recipe.id]">
+          <img [src]="imageUrl(m.recipe)" [alt]="m.recipe.name" />
+          <div class="recipe-info">
+            @if (m.recipe.rating) {
+              <span class="rating"><app-icon name="star"></app-icon> {{ m.recipe.rating }}</span>
+            } @else {
+              <span class="new-recipe">Nova receita</span>
+            }
+            <h3>{{ m.recipe.name }}</h3>
+            <p>
+              <app-icon name="clock"></app-icon> {{ m.recipe.minutes }} min ·
+              <app-icon name="servings"></app-icon> {{ m.recipe.servings }} porções
+            </p>
+            @if (m.missing.length) {
+              <small>Faltam: {{ m.missing.join(", ") }}</small>
+            }
+          </div>
+        </a>
+      } @empty {
+        <p class="empty">Nenhuma receita nesta seção.</p>
+      }
+    </div>
+  </section>
+}

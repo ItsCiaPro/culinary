@@ -24,6 +24,12 @@ export interface Recipe {
   ingredients: string[];
   machines: string[];
   steps: string[];
+  images?: string[];
+}
+export function recipeImageUrl(recipe: Recipe): string {
+  return recipe.image.startsWith("blob:") || recipe.image.startsWith("data:")
+    ? recipe.image
+    : `assets/${recipe.image}`;
 }
 export const CATEGORIES: Category[] = [
   {

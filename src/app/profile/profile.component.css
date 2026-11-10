@@ -1,0 +1,77 @@
+.profile-card {
+  max-width: 760px;
+  margin: 24px auto;
+  overflow: hidden;
+}
+
+.profile-banner {
+  min-height: 220px;
+  background:
+    radial-gradient(ellipse at 82% 18%, #ebc1669c 0, transparent 34%),
+    radial-gradient(ellipse at 14% 100%, #c7692c99 0, transparent 42%),
+    linear-gradient(125deg, #402306 0%, #6f5947 48%, #835f53 100%);
+}
+
+.profile-content {
+  position: relative;
+  padding: 66px 32px 30px;
+}
+
+.profile-photo {
+  position: absolute;
+  top: -62px;
+  left: 30px;
+  width: 124px;
+  height: 124px;
+  object-fit: cover;
+  border: 5px solid var(--paper);
+  border-radius: 50%;
+}
+
+.profile-badge {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 6px 11px;
+  border-radius: 20px;
+  background: var(--cor-verde-claro);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.profile-content h2 {
+  margin: 0;
+  font: 700 30px "Playfair Display", serif;
+}
+
+.profile-email {
+  margin: 5px 0 16px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.profile-bio {
+  max-width: 560px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.profile-content .primary-btn {
+  gap: 8px;
+}
+
+@media (max-width: 650px) {
+  .profile-banner {
+    min-height: 165px;
+  }
+
+  .profile-content {
+    padding: 58px 20px 24px;
+  }
+
+  .profile-photo {
+    left: 18px;
+    width: 108px;
+    height: 108px;
+  }
+}

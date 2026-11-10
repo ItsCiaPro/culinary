@@ -12,6 +12,21 @@
   max-height: 570px;
 }
 
+.detail-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  align-content: start;
+  gap: 10px;
+}
+
+.detail-gallery img {
+  width: 100%;
+  max-height: 570px;
+  aspect-ratio: 1;
+  border-radius: 24px;
+  object-fit: cover;
+}
+
 .detail h1 {
   font:
     700 42px "Playfair Display",
@@ -46,6 +61,10 @@
 
 @media (max-width: 650px) {
   .detail > img {
+    max-height: 300px;
+  }
+
+  .detail-gallery img {
     max-height: 300px;
   }
 }

@@ -20,13 +20,28 @@
   flex: 1;
 }
 
+.ingredient-icon {
+  width: 19px;
+  height: 19px;
+  color: var(--cor-cacau);
+}
+
 .buy {
+  display: grid;
+  flex: 0 0 27px;
+  place-items: center;
   width: 27px;
   height: 27px;
+  padding: 0;
   border: 2px solid var(--herb);
   color: var(--herb);
   border-radius: 50%;
   background: none;
+}
+
+.buy app-icon {
+  width: 15px;
+  height: 15px;
 }
 
 .remove {

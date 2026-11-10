@@ -1,59 +1,124 @@
-<h1 class="page-title">Postar receita</h1>
-<p class="muted">Compartilhe sua criação com a comunidade.</p>
-<form class="post-form soft" (submit)="submit($event)">
-  <label
-    >Nome da receita<input
-      class="field"
-      required
-      placeholder="Ex.: Bolo de cenoura" /></label
-  ><label
-    >Descrição<textarea
-      class="field"
-      rows="3"
-      placeholder="Uma descrição curta e apetitosa..."
-    ></textarea>
-  </label>
-  <div class="two-fields">
-    <label
-      >Tempo (min)<input class="field" type="number" min="1" required /></label
-    ><label
-      >Porções<input class="field" type="number" min="1" required
-    /></label>
+@if (stage < 3) {
+  <h1 class="page-title">Postar receita</h1>
+  <p class="muted">Compartilhe sua criação com a comunidade.</p>
+
+  <div class="post-progress" aria-label="Etapas da criação da receita">
+    <span [class.current]="stage === 1"><b>1</b> O começo</span>
+    <i></i>
+    <span [class.current]="stage === 2"><b>2</b> Detalhes</span>
   </div>
-  <label
-    >Foto do prato<input class="field" type="file" accept="image/*"
-  /></label>
-  <h3>Ingredientes</h3>
-  <div class="inline">
-    <input
-      class="field"
-      [(ngModel)]="ingredient"
-      name="ingredient"
-      placeholder="Novo ingrediente"
-    /><button type="button" class="primary-btn" (click)="add()">
-      Adicionar
-    </button>
-  </div>
-  <div class="tags">
-    @for (i of ingredients; track i) {
-      <span
-        >{{ i }}
-        <button type="button" (click)="removeIngredient(i)" [attr.aria-label]="'Remover ' + i">
-          <app-icon name="close"></app-icon>
-        </button></span
+
+  @if (stage === 1) {
+    <section class="post-form soft">
+      <p class="step-kicker">ETAPA 1 DE 2</p>
+      <h2>Primeiro, apresente seu prato</h2>
+      <p class="muted">Nome, descrição e fotos ajudam a dar água na boca.</p>
+      <label>
+        Nome da receita
+        <input class="field" [(ngModel)]="name" name="name" required placeholder="Ex.: Bolo de cenoura" />
+      </label>
+      <label>
+        Descrição
+        <textarea class="field" [(ngModel)]="description" name="description" required rows="3" placeholder="Uma descrição curta e apetitosa..."></textarea>
+      </label>
+      <label>
+        Fotos do prato
+        <input class="field file-field" type="file" accept="image/*" multiple (change)="addPhotos($event)" />
+      </label>
+      @if (photos.length) {
+        <div class="photo-previews" aria-label="Prévia das fotos selecionadas">
+          @for (photo of photos; track photo.url) {
+            <figure>
+              <img [src]="photo.url" [alt]="'Prévia: ' + photo.file.name" />
+              <button type="button" (click)="removePhoto(photo)" [attr.aria-label]="'Remover ' + photo.file.name">
+                <app-icon name="close"></app-icon>
+              </button>
+            </figure>
+          }
+        </div>
+      } @else {
+        <p class="photo-hint">Você pode selecionar mais de uma foto. Escolha pelo menos uma para continuar.</p>
+      }
+      <button
+        type="button"
+        class="primary-btn full"
+        [disabled]="!name.trim() || !description.trim() || !photos.length"
+        (click)="stage = 2"
       >
-    }
-  </div>
-  <h3>Modo de preparo</h3>
-  @for (s of steps; track $index) {
-    <input
-      class="field"
-      [(ngModel)]="steps[$index]"
-      [name]="'step' + $index"
-      [placeholder]="'Passo ' + ($index + 1)"
-    />
+        Continuar para os detalhes <app-icon name="arrow-right"></app-icon>
+      </button>
+    </section>
+  } @else {
+    <form class="post-form soft" (submit)="showPreview($event)">
+      <p class="step-kicker">ETAPA 2 DE 2</p>
+      <h2>Conte como preparar</h2>
+      <div class="two-fields">
+        <label>Tempo (min)<input class="field" type="number" min="1" required [(ngModel)]="minutes" name="minutes" /></label>
+        <label>Porções<input class="field" type="number" min="1" required [(ngModel)]="servings" name="servings" /></label>
+      </div>
+
+      <h3>Ingredientes</h3>
+      <div class="inline">
+        <input class="field" [(ngModel)]="ingredient" name="ingredient" placeholder="Novo ingrediente" (keydown.enter)="$event.preventDefault(); add()" />
+        <button type="button" class="primary-btn" (click)="add()">Adicionar</button>
+      </div>
+      <div class="tags">
+        @for (item of ingredients; track item) {
+          <span>{{ item }} <button type="button" (click)="removeIngredient(item)" [attr.aria-label]="'Remover ' + item"><app-icon name="close"></app-icon></button></span>
+        }
+      </div>
+
+      <h3>Utensílios necessários</h3>
+      <div class="machine-options">
+        @for (machine of machines; track machine.id) {
+          <label><input type="checkbox" [checked]="selectedMachines.includes(machine.id)" (change)="toggleMachine(machine.id, $event)" /> {{ machine.name }}</label>
+        }
+        @for (machine of customMachines; track machine.id) {
+          <label><input type="checkbox" [checked]="selectedMachines.includes(machine.id)" (change)="toggleMachine(machine.id, $event)" /> {{ machine.name }}</label>
+        }
+      </div>
+      <div class="inline">
+        <input class="field" [(ngModel)]="customMachine" name="customMachine" placeholder="Adicionar outra máquina" (keydown.enter)="$event.preventDefault(); addMachine()" />
+        <button type="button" class="primary-btn" [disabled]="!customMachine.trim()" (click)="addMachine()">Adicionar</button>
+      </div>
+
+      <h3>Modo de preparo</h3>
+      @for (step of steps; track $index) {
+        <input class="field" [(ngModel)]="steps[$index]" [name]="'step' + $index" [placeholder]="'Passo ' + ($index + 1)" />
+      }
+      <button type="button" class="text-btn" (click)="steps.push('')"><app-icon name="plus"></app-icon> Adicionar passo</button>
+      @if (detailsError) {
+        <p class="form-error" role="alert">{{ detailsError }}</p>
+      }
+      <div class="form-actions">
+        <button type="button" class="secondary-btn" (click)="stage = 1"><app-icon name="arrow-left"></app-icon> Voltar</button>
+        <button type="submit" class="primary-btn">Ver prévia <app-icon name="arrow-right"></app-icon></button>
+      </div>
+    </form>
   }
-  <button type="button" class="text-btn" (click)="steps.push('')">
-    <app-icon name="plus"></app-icon> Adicionar passo</button
-  ><button class="primary-btn full">Publicar receita</button>
-</form>
+} @else if (preview) {
+  <a class="back" (click)="stage = 2"><app-icon name="arrow-left"></app-icon> Voltar ao formulário</a>
+  <h1 class="page-title">Prévia da receita</h1>
+  <p class="muted">Assim sua receita aparecerá na página de detalhes.</p>
+  <div class="detail preview-detail">
+    <div class="detail-gallery">
+      @for (image of preview.images; track image) {
+        <img [src]="image" [alt]="'Foto de ' + preview.name" />
+      }
+    </div>
+    <section>
+      <h1>{{ preview.name }}</h1>
+      <p class="muted">{{ preview.description }}</p>
+      <p class="recipe-meta"><b>Nova receita</b> · <app-icon name="clock"></app-icon> {{ preview.minutes }} min · <app-icon name="servings"></app-icon> {{ preview.servings }} porções</p>
+      <div class="soft preview-status">Prévia da publicação — sua receita ficará disponível apenas nesta sessão.</div>
+      <h2>Ingredientes</h2>
+      <ul>@for (item of preview.ingredients; track item) { <li>{{ item }}</li> }</ul>
+      <h2>Modo de preparo</h2>
+      <ol>@for (step of preview.steps; track step) { <li>{{ step }}</li> }</ol>
+    </section>
+  </div>
+  <div class="preview-actions">
+    <button type="button" class="secondary-btn" (click)="stage = 2"><app-icon name="arrow-left"></app-icon> Voltar ao formulário</button>
+    <button type="button" class="primary-btn" (click)="publish()">Confirmar publicação</button>
+  </div>
+}

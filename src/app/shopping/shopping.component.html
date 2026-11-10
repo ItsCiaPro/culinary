@@ -5,7 +5,7 @@
     <div class="shopping-row">
       <button class="buy" (click)="pantry.buy(i)" [attr.aria-label]="'Marcar ' + i + ' como comprado'">
         <app-icon name="check"></app-icon>
-      </button><span>{{ i }}</span
+      </button><app-icon class="ingredient-icon" [name]="iconFor(i)"></app-icon><span>{{ i }}</span
       ><button class="remove" (click)="pantry.removeShopping(i)" [attr.aria-label]="'Remover ' + i">
         <app-icon name="close"></app-icon>
       </button>

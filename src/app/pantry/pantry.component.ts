@@ -17,11 +17,24 @@ export class PantryComponent {
   machines = MACHINES;
   cat = CATEGORIES[0].id;
   q = "";
+  customIngredient = "";
+  customMachine = "";
   items() {
     return this.q
-      ? CATEGORIES.flatMap((c) => c.items).filter((i) =>
-          i.toLowerCase().includes(this.q.toLowerCase()),
-        )
+      ? [
+          ...CATEGORIES.flatMap((c) => c.items),
+          ...this.pantry.customIngredients(),
+        ].filter((item) => item.toLowerCase().includes(this.q.toLowerCase()))
       : CATEGORIES.find((c) => c.id === this.cat)!.items;
+  }
+  addCustomIngredient(event: Event): void {
+    event.preventDefault();
+    this.pantry.addCustomIngredient(this.customIngredient);
+    this.customIngredient = "";
+  }
+  addCustomMachine(event: Event): void {
+    event.preventDefault();
+    this.pantry.addCustomMachine(this.customMachine);
+    this.customMachine = "";
   }
 }

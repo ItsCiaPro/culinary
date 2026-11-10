@@ -34,7 +34,8 @@ export type IconName =
   | "grill"
   | "check"
   | "close"
-  | "plus";
+  | "plus"
+  | "food";
 
 @Component({
   selector: "app-icon",
@@ -177,6 +178,10 @@ export type IconName =
         }
         @case ("plus") {
           <path d="M12 5v14m-7-7h14" />
+        }
+        @case ("food") {
+          <path d="M4 10h16l-2 9H6l-2-9Z" />
+          <path d="M3 10h18M8 7c0-2 1-3 2-4m4 4c0-2 1-3 2-4" />
         }
       }
     </svg>

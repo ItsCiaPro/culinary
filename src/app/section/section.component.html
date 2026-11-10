@@ -6,9 +6,13 @@
   <div class="recipe-grid">
     @for (r of recipes; track r.id) {
       <a class="recipe-card" [routerLink]="['/receita', r.id]"
-        ><img [src]="'assets/' + r.image" [alt]="r.name" />
+        ><img [src]="imageUrl(r)" [alt]="r.name" />
         <div class="recipe-info">
-          <span class="rating"><app-icon name="star"></app-icon> {{ r.rating }}</span>
+          @if (r.rating) {
+            <span class="rating"><app-icon name="star"></app-icon> {{ r.rating }}</span>
+          } @else {
+            <span class="rating">Nova receita</span>
+          }
           <h3>{{ r.name }}</h3>
           <p>
             <app-icon name="clock"></app-icon> {{ r.minutes }} min ·

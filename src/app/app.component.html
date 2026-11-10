@@ -2,7 +2,7 @@
   <aside class="sidebar">
     <a routerLink="/" class="brand">
       <span class="brand-icon"><app-icon name="pot"></app-icon></span>
-      <span>Cook Today</span>
+      <span>Byte &amp; Garfo</span>
     </a>
     <nav>
       @for (item of nav; track item.path) {
@@ -27,9 +27,9 @@
       <header class="hero">
         <div class="mobile-brand">
           <a routerLink="/" class="mobile-brand-name">
-            <app-icon name="pot"></app-icon> Cook Today
+            <app-icon name="pot"></app-icon> Byte &amp; Garfo
           </a>
-          <a routerLink="/entrar" aria-label="Entrar">
+          <a routerLink="/perfil" aria-label="Ver perfil">
             <app-icon name="user"></app-icon>
           </a>
         </div>
@@ -43,7 +43,7 @@
           />
           <button aria-label="Pesquisar"><app-icon name="arrow-right"></app-icon></button>
         </form>
-        <a class="profile-link" routerLink="/entrar" aria-label="Entrar ou acessar o perfil">
+        <a class="profile-link" routerLink="/perfil" aria-label="Ver perfil">
           <app-icon name="user"></app-icon>
         </a>
       </header>

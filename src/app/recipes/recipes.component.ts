@@ -1,8 +1,9 @@
 import { Component, inject } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
-import { RECIPES, matchRecipe } from "../data";
+import { RECIPES, matchRecipe, recipeImageUrl } from "../data";
 import { PantryService } from "../pantry.service";
 import { IconComponent } from "../shared/icon.component";
+import { RecipesService } from "../recipes.service";
 
 @Component({
   standalone: true,
@@ -12,20 +13,28 @@ import { IconComponent } from "../shared/icon.component";
 })
 export class RecipesComponent {
   pantry = inject(PantryService);
+  sessionRecipes = inject(RecipesService);
   q = inject(ActivatedRoute).snapshot.queryParamMap.get("q") || "";
-  filters = ["Posso fazer", "Falta pouco", "Todas"];
-  filter = this.q ? "Todas" : "Posso fazer";
-  list() {
-    let a = RECIPES.map((r) =>
+  imageUrl = recipeImageUrl;
+  get matches() {
+    return [...this.sessionRecipes.sessionRecipes(), ...RECIPES].map((r) =>
       matchRecipe(r, this.pantry.ingredients(), this.pantry.machines()),
     );
-    if (this.filter === "Posso fazer") a = a.filter((x) => x.status === "pode");
-    if (this.filter === "Falta pouco")
-      a = a.filter((x) => x.status === "quase");
-    if (this.q)
-      a = a.filter((x) =>
-        x.recipe.name.toLowerCase().includes(this.q.toLowerCase()),
-      );
-    return a;
+  }
+  private matchingSearch() {
+    return this.q
+      ? this.matches.filter((match) =>
+          match.recipe.name.toLowerCase().includes(this.q.toLowerCase()),
+        )
+      : this.matches;
+  }
+  get ready() {
+    return this.matchingSearch().filter((match) => match.status === "pode");
+  }
+  get almost() {
+    return this.matchingSearch().filter((match) => match.status === "quase");
+  }
+  get rest() {
+    return this.matchingSearch().filter((match) => match.status === "longe");
   }
 }

@@ -114,6 +114,7 @@
   box-shadow:
     0 0 0 20px #ffffff09,
     0 0 0 42px #ffffff08;
+  pointer-events: none;
 }
 
 .search {
@@ -132,6 +133,8 @@
 }
 
 .profile-link {
+  position: relative;
+  z-index: 1;
   display: grid;
   width: 42px;
   height: 42px;

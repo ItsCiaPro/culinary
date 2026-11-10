@@ -15,6 +15,7 @@
   <div
     class="shorts-stage"
     (touchstart)="onTouchStart($event)"
+    (touchmove)="onTouchMove($event)"
     (touchend)="onTouchEnd($event)"
   >
     @for (recipe of [activeRecipe]; track recipe.id) {
@@ -24,10 +25,11 @@
         [class.slide-previous]="slideDirection === 'previous'"
         [attr.aria-label]="'Vídeo curto: ' + recipe.name"
         [style.background-image]="'url(assets/' + recipe.image + ')'"
+        [style.transform]="dragging ? 'translateY(' + dragOffset + 'px)' : null"
+        [style.transition]="dragging ? 'none' : null"
       >
         <div class="video-topline">
           <span>RECEITA EM DESTAQUE</span>
-          <span>{{ activeIndex + 1 }} / {{ recipes.length }}</span>
         </div>
 
         <div class="video-content">

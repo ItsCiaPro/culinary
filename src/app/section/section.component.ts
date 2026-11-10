@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { RouterLink } from "@angular/router";
-import { Recipe } from "../data";
+import { Recipe, recipeImageUrl } from "../data";
 import { IconComponent } from "../shared/icon.component";
 
 @Component({
@@ -14,4 +14,5 @@ import { IconComponent } from "../shared/icon.component";
 export class SectionComponent {
   title = "";
   recipes: Recipe[] = [];
+  imageUrl = recipeImageUrl;
 }

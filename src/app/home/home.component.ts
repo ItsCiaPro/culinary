@@ -4,6 +4,7 @@ import { SectionComponent } from "../section/section.component";
 import { PantryService } from "../pantry.service";
 import { RECIPES, matchRecipe } from "../data";
 import { IconComponent } from "../shared/icon.component";
+import { RecipesService } from "../recipes.service";
 
 @Component({
   standalone: true,
@@ -13,8 +14,9 @@ import { IconComponent } from "../shared/icon.component";
 })
 export class HomeComponent {
   pantry = inject(PantryService);
+  sessionRecipes = inject(RecipesService);
   get matches() {
-    return RECIPES.map((r) =>
+    return [...this.sessionRecipes.sessionRecipes(), ...RECIPES].map((r) =>
       matchRecipe(r, this.pantry.ingredients(), this.pantry.machines()),
     );
   }
@@ -27,5 +29,9 @@ export class HomeComponent {
   get almostRecipes() {
     return this.almost.map((match) => match.recipe);
   }
-  popular = [...RECIPES].sort((a, b) => b.rating - a.rating).slice(0, 4);
+  get popular() {
+    return [...this.sessionRecipes.sessionRecipes(), ...RECIPES]
+      .sort((a, b) => b.rating - a.rating)
+      .slice(0, 4);
+  }
 }

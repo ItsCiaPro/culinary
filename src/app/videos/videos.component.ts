@@ -14,6 +14,8 @@ export class VideosComponent {
   activeIndex = 0;
   slideDirection: "next" | "previous" = "next";
   private touchStartY: number | null = null;
+  dragOffset = 0;
+  dragging = false;
   private lastWheelNavigation = 0;
   authors = [
     "@chefaninha",
@@ -64,24 +66,50 @@ export class VideosComponent {
   }
 
   onTouchStart(event: TouchEvent): void {
-    this.touchStartY = event.changedTouches[0]?.screenY ?? null;
+    this.touchStartY = event.changedTouches[0]?.clientY ?? null;
+    this.dragOffset = 0;
+    this.dragging = true;
+  }
+
+  onTouchMove(event: TouchEvent): void {
+    if (this.touchStartY === null) return;
+    const touchY = event.changedTouches[0]?.clientY;
+    if (touchY === undefined) return;
+    const offset = touchY - this.touchStartY;
+    const atFirstVideo = this.activeIndex === 0 && offset > 0;
+    const atLastVideo = this.activeIndex === this.recipes.length - 1 && offset < 0;
+    this.dragOffset = atFirstVideo || atLastVideo ? offset * 0.25 : offset;
   }
 
   onTouchEnd(event: TouchEvent): void {
-    if (this.touchStartY === null) return;
+    if (this.touchStartY === null) {
+      this.dragging = false;
+      return;
+    }
 
-    const touchEndY = event.changedTouches[0]?.screenY;
-    if (touchEndY === undefined) return;
+    const touchEndY = event.changedTouches[0]?.clientY;
+    if (touchEndY === undefined) {
+      this.touchStartY = null;
+      this.dragging = false;
+      this.dragOffset = 0;
+      return;
+    }
 
     const swipeDistance = this.touchStartY - touchEndY;
     this.touchStartY = null;
-    if (Math.abs(swipeDistance) < 50) return;
+    this.dragging = false;
+    const threshold = Math.max(70, window.innerHeight * 0.16);
+    if (Math.abs(swipeDistance) < threshold) {
+      this.dragOffset = 0;
+      return;
+    }
 
     if (swipeDistance > 0) {
       this.showNext();
     } else {
       this.showPrevious();
     }
+    this.dragOffset = 0;
   }
 
 }
